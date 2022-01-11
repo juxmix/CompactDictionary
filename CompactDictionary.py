@@ -40,14 +40,24 @@ class CompactDictionary:
 
     def load_text(self, file_name):
         f = open(file_name)
+        num_words = 0
+        skipped_words = 0
+        failed_words = 0
         for line in f:
             lst_pals = line.split()
             for palabra in lst_pals:
                 #Notepad UTF-8 unicode indicator breaks everything
                 if '\ufeff' in palabra:
                     continue
-                added = self.add_word(palabra)
+                if not self.contains(palabra):
+                    added = self.add_word(palabra)
+                    num_words = num_words + 1 if added else num_words
+                    failed_words = failed_words + 1 if not added else failed_words
+                else:
+                    skipped_words += 1
                 logging.debug(palabra + " " + str(added))
+        logging.info("Added: " + str(num_words) + " / skipped: " + str(skipped_words)\
+                     + " / failed: " + str(failed_words))
         f.close()
         
 

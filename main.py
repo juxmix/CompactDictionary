@@ -6,9 +6,10 @@ if __name__ == '__main__':
     clean_word = cd.clean_word(" \n$0_algo-[]123.;\t ")
     logging.info("Clean word: '{}'".format(clean_word))
     cd.load_text("Frankenstein.txt")
+    cd.load_text("Pride_and_prejudice.txt")
     words = ("ancien", "monster", "lady", "gentleman")
     for word in words:
         is_in = cd.contains(word)
-        logging.info(word + " in Frankenstein.txt: " + str(is_in))
+        logging.info(word + " in Dictionary: " + str(is_in))
 
 
