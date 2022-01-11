@@ -1,16 +1,14 @@
-# This is a sample Python script.
+import CompactDictionary as compDict
+import logging
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print("Hi, {0}".format(name))  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    cd = compDict.CompactDictionary()
+    clean_word = cd.clean_word(" \n$0_algo-[]123.;\t ")
+    logging.info("Clean word: '{}'".format(clean_word))
+    cd.load_text("Frankenstein.txt")
+    words = ("ancien", "monster", "lady", "gentleman")
+    for word in words:
+        is_in = cd.contains(word)
+        logging.info(word + " in Frankenstein.txt: " + str(is_in))
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+

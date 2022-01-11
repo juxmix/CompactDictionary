@@ -3,7 +3,7 @@ import logging
 class CompactDictionary:
 
     def __init__(self, language="English"):
-        self.END_WORD = '-'
+        self.END_WORD = '#'
         self.language = language
         self.fullDict = dict()
         logging.basicConfig(level=logging.INFO)
@@ -43,24 +43,12 @@ class CompactDictionary:
         for line in f:
             lst_pals = line.split()
             for palabra in lst_pals:
+                #Notepad UTF-8 unicode indicator breaks everything
                 if '\ufeff' in palabra:
                     continue
                 added = self.add_word(palabra)
                 logging.debug(palabra + " " + str(added))
         f.close()
-
-
-
-
-if __name__ == '__main__':
-    cd = CompactDictionary()
-    clean_word = cd.clean_word(" \n$0_algo-[]123.;\t ")
-    logging.info("Clean word: '{}'".format(clean_word))
-    cd.load_text("Frankenstein.txt")
-    words = ("ancien", "monster", "lady", "gentleman")
-    for word in words:
-        is_in = cd.contains(word)
-        logging.info(word + " in Frankenstein.txt: " + str(is_in))
         
 
 
