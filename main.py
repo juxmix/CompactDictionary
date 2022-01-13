@@ -22,4 +22,4 @@ if __name__ == '__main__':
         is_in = cd.contains(word)
         logging.info(word + " -> " + str(is_in))
 
-
+    cd.dump_dict()

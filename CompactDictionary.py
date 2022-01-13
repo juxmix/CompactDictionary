@@ -4,6 +4,7 @@ import re
 F_INSERTED_WORDS = "Inserted.txt"
 F_REJECTED_WRODS = "Rejected.txt"
 F_FAILED_WORDS = "Failed.txt"
+F_DICTIONARY_DUMP = "Dictionary.txt"
 
 class CompactDictionary:
 
@@ -93,7 +94,33 @@ class CompactDictionary:
         ff.close()
         fr.close()
         fi.close()
-        
+
+    def dump_dict(self):
+        fdict = open(F_DICTIONARY_DUMP, "w")
+        self._dump_recursive("", self.fullDict, fdict)
+        fdict.close()
+        #first_level_keys = self.fullDict.keys()
+        #word = None
+        #for key, subdict in self.fullDict.items():
+            #fdict.write(self.dump_recursive(key,subdict))
+            #subdict = self.fullDict[key]
+            #while subdict:
+            #    for subkey in subdict.keys:
+            #        word += subkey
+
+
+    def _dump_recursive(self, preffix, dict, fdict):
+        if not dict:
+            if len(preffix) > 0:
+                fdict.write(preffix+"\n")
+        else:
+            for key, subdict in dict.items():
+                if subdict:
+                    self.dump_recursive(preffix+key, subdict, fdict)
+                else:
+                    fdict.write(preffix + key + "\n")
+
+
 
 
 
