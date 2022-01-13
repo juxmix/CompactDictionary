@@ -14,7 +14,12 @@ class CompactDictionary:
         logging.basicConfig(level=logging.INFO)
 
     def clean_word(self, word):
-        return word.strip("\t\n .,;:&#*/()[]{}¡!¿?$€—-_“”\‘\"\'0123456789").lower()
+        stripped_word = word.strip("\t\n .,;:&#*/()[]{}¡!¿?$€—-_“”\‘\"\'0123456789").lower()
+        is_not_a_word = any(not c.isalnum() for c in stripped_word)
+        if is_not_a_word:
+            return ""
+        else:
+            return stripped_word
 
     def add_word(self, word):
         clean_word1 = self.clean_word(word)
